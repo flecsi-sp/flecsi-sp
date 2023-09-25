@@ -1,0 +1,3 @@
+[submodule "sp/cartesian"]
+	path = sp/cartesian
+	url = git@re-git.lanl.gov:flecsi-sp/cartesian.git
