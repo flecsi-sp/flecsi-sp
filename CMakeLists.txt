@@ -15,7 +15,7 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 # Project.
 #------------------------------------------------------------------------------#
 
-project(FleCSI-SP LANGUAGES NONE)
+project(FleCSI-SP LANGUAGES C CXX)
 
 #------------------------------------------------------------------------------#
 # Find the FleCSI package. This must be done early so that the FleCSI cmake
