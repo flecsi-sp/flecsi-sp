@@ -1,6 +1,8 @@
 [submodule "sp/cartesian"]
 	path = sp/cartesian
 	url = git@re-git.lanl.gov:flecsi-sp/cartesian.git
+  branch = develop
 [submodule "sp/fvm"]
 	path = sp/fvm
 	url = git@re-git.lanl.gov:flecsi-sp/fvm.git
+  branch = develop
