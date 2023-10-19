@@ -41,50 +41,25 @@ if(ENABLE_DOCUMENTATION)
   include(FleCSI/documentation)
   include(deploy)
 
-  option(ENABLE_DOXYGEN "Enable Doxygen documentation" ON)
-  option(ENABLE_SPHINX  "Enable Sphinx documentation"  ON)
-  mark_as_advanced(ENABLE_DOXYGEN)
-  mark_as_advanced(ENABLE_SPHINX)
+  include(FleCSI/sphinx)
 
-  if(ENABLE_DOXYGEN)
-    include(FleCSI/doxygen)
+  flecsi_add_sphinx_target(main
+    CONFIG ${CMAKE_SOURCE_DIR}/doc/sphinx
+    OUTPUT ${CMAKE_BINARY_DIR}/doc
+  )
 
-    # Create Doxygen output directory eagerly to avoid race condition.
-    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/doc/api)
+  # This is for local install of the documentation. To deploy the
+  # documentation to the flecsi website, use the "deploy-documentation"
+  # target.
+  install(
+    DIRECTORY
+      ${CMAKE_BINARY_DIR}/doc/
+    DESTINATION
+      ${CMAKE_INSTALL_PREFIX}/share/doc/flecsi-sp
+    OPTIONAL
+  )
 
-    flecsi_add_doxygen_target(core
-      CONFIGS
-        ${CMAKE_SOURCE_DIR}/doc/doxygen/core.conf.in
-        ${CMAKE_SOURCE_DIR}/doc/doxygen/conf.in
-    )
-    flecsi_add_doxygen_target(user
-      CONFIGS
-        ${CMAKE_SOURCE_DIR}/doc/doxygen/user.conf.in
-        ${CMAKE_SOURCE_DIR}/doc/doxygen/conf.in
-    )
-  endif()
-
-  if(ENABLE_SPHINX)
-    include(FleCSI/sphinx)
-
-    flecsi_add_sphinx_target(main
-      CONFIG ${CMAKE_SOURCE_DIR}/doc/sphinx
-      OUTPUT ${CMAKE_BINARY_DIR}/doc
-    )
-
-    # This is for local install of the documentation. To deploy the
-    # documentation to the flecsi website, use the "deploy-documentation"
-    # target.
-    install(
-      DIRECTORY
-        ${CMAKE_BINARY_DIR}/doc/
-      DESTINATION
-        ${CMAKE_INSTALL_PREFIX}/share/doc/Burton
-      OPTIONAL
-    )
-  endif()
-
-  if((NOT PAGES_REPO STREQUAL "") AND ENABLE_SPHINX AND ENABLE_DOXYGEN)
+  if(NOT PAGES_REPO STREQUAL "")
     add_doc_deployment(deploy-docs PAGES_REPO ${PAGES_REPO})
   endif()
 endif()
