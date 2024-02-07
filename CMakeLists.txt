@@ -33,34 +33,58 @@ endif()
 # Documentation
 #------------------------------------------------------------------------------#
 
-set(PAGES_REPO "git@re-git.lanl.gov:flecsi-sp/flecsi-sp.git"
-  CACHE STRING "Pages repository for pages branch")
 option(ENABLE_DOCUMENTATION "Enable documentation" OFF)
 
 if(ENABLE_DOCUMENTATION)
   include(FleCSI/documentation)
-  include(deploy)
-
+  include(FleCSI/doxygen)
   include(FleCSI/sphinx)
+  include(FleCSI/subdirlist)
+
+  # Avoid race condition by proactively creating output directory
+  file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/.doxygen/xml)
+  flecsi_add_doxygen_target(sp
+    CONFIGS
+      ${CMAKE_SOURCE_DIR}/doc/doxygen/sp.conf.in
+      ${CMAKE_SOURCE_DIR}/doc/doxygen/conf.in
+  )
+
+  file(COPY ${CMAKE_SOURCE_DIR}/doc/sphinx
+    DESTINATION ${CMAKE_BINARY_DIR}
+  )
+  file(REMOVE_RECURSE ${CMAKE_BINARY_DIR}/.sphinx)
+  file(RENAME ${CMAKE_BINARY_DIR}/sphinx
+    ${CMAKE_BINARY_DIR}/.sphinx
+  )
+
+  make_subdirlist(_SUBDIRECTORIES ${CMAKE_SOURCE_DIR}/sp False)
+  foreach(_SUBDIR ${_SUBDIRECTORIES})
+    file(COPY ${CMAKE_SOURCE_DIR}/sp/${_SUBDIR}/doc/sphinx/index.rst
+      DESTINATION ${CMAKE_BINARY_DIR}/.sphinx/${_SUBDIR}
+    )
+    file(COPY ${CMAKE_SOURCE_DIR}/sp/${_SUBDIR}/doc/sphinx/${_SUBDIR}
+      DESTINATION ${CMAKE_BINARY_DIR}/.sphinx/${_SUBDIR}
+    )
+
+    # Create output directory
+    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/.sphinx/${_SUBDIR}/${_SUBDIR}/src)
+    execute_process(COMMAND
+      ${CMAKE_COMMAND} -E create_symlink
+        ${CMAKE_SOURCE_DIR}/sp/${_SUBDIR}/${_SUBDIR}
+        ${CMAKE_BINARY_DIR}/.sphinx/${_SUBDIR}/${_SUBDIR}/src/${_SUBDIR}
+    )
+    execute_process(COMMAND
+      ${CMAKE_COMMAND} -E create_symlink
+        ${CMAKE_SOURCE_DIR}/sp/${_SUBDIR}/examples
+        ${CMAKE_BINARY_DIR}/.sphinx/${_SUBDIR}/${_SUBDIR}/src/examples
+    )
+  endforeach()
 
   flecsi_add_sphinx_target(main
-    CONFIG ${CMAKE_SOURCE_DIR}/doc/sphinx
+    CONFIG ${CMAKE_BINARY_DIR}/.sphinx
     OUTPUT ${CMAKE_BINARY_DIR}/doc
   )
-
-  # This is for local install of the documentation. To deploy the
-  # documentation to the flecsi website, use the "deploy-documentation"
-  # target.
-  install(
-    DIRECTORY
-      ${CMAKE_BINARY_DIR}/doc/
-    DESTINATION
-      ${CMAKE_INSTALL_PREFIX}/share/doc/flecsi-sp
-    OPTIONAL
-  )
-
-  if(NOT PAGES_REPO STREQUAL "")
-    add_doc_deployment(deploy-docs PAGES_REPO ${PAGES_REPO})
-  endif()
 endif()
 
+add_subdirectory(sp/fdm)
+add_subdirectory(sp/fvm)

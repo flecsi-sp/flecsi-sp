@@ -1,11 +1,15 @@
 #! /usr/bin/env python3
-import sys
 
 # Sphinx extensions as list of strings
 extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.githubpages',
+    'breathe'
 ]
+
+# Breathe configuration
+breathe_projects = {"doxygen": "@CMAKE_BINARY_DIR@/.doxygen/xml"}
+breathe_default_project = "doxygen"
 
 # Add any paths that contain templates
 templates_path = ['_templates']
@@ -23,7 +27,7 @@ master_doc = 'index'
 
 # Project information
 project = 'FleCSI-SP'
-copyright = 'Copyright (C) 2023, Triad National Security, LLC'
+copyright = '(C) 2023, Triad National Security, LLC'
 author = 'FleCSI-SP Team'
 
 # Short version
@@ -45,6 +49,15 @@ exclude_patterns = [
     'Thumbs.db',
     '.DS_Store'
 ]
+
+# Ignore missing identifiers
+nitpick_ignore = [
+    ('cpp:identifier', 'quantities'),
+    ('cpp:identifier', 'interior'),
+    ('cpp:identifier', 'axis'),
+    ('cpp:identifier', 'domain')
+]
+nitpick_ignore_regex = [ (r'cpp:identifier', r'flecsi.*') ]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'stata-dark'
