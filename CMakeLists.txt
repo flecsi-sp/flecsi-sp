@@ -34,6 +34,10 @@ endif()
 #------------------------------------------------------------------------------#
 
 option(ENABLE_DOCUMENTATION "Enable documentation" OFF)
+set(GITHUB_PAGES_REPO "git@github.com:flecsi-sp/flecsi-sp.git"
+    CACHE STRING "GitHub Pages repository for gh-pages branch")
+mark_as_advanced(ENABLE_DOCUMENTATION)
+mark_as_advanced(GITHUB_PAGES_REPO)
 
 if(ENABLE_DOCUMENTATION)
   include(FleCSI/documentation)
@@ -84,6 +88,11 @@ if(ENABLE_DOCUMENTATION)
     CONFIG ${CMAKE_BINARY_DIR}/.sphinx
     OUTPUT ${CMAKE_BINARY_DIR}/doc
   )
+
+  if(NOT GITHUB_PAGES_REPO STREQUAL "")
+    flecsi_add_doc_deployment(deploy-docs
+      GITHUB_PAGES_REPO ${GITHUB_PAGES_REPO})
+  endif()
 endif()
 
 add_subdirectory(sp/fdm)
