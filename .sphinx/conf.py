@@ -8,7 +8,7 @@ extensions = [
 ]
 
 # Breathe configuration
-breathe_projects = {"doxygen": "/home/bergen/devel/re-git/sp/default/build/.doxygen/xml"}
+breathe_projects = {"doxygen": "/home/bergen/devel/re-git/sp/doc/build/.doxygen/xml"}
 breathe_default_project = "doxygen"
 
 # Add any paths that contain templates
