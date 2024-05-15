@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example Problem &mdash; FleCSI-SP  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="canonical" href="http://www.flecsi.org/fdm/fdm/method.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="FDM Specialization API Reference" href="api.html" />
+    <link rel="prev" title="Finite Difference Method (FDM)" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/flecsi-sp.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                Version: 
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Finite Difference Method (FDM)</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Example Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#elementary-iterative-solvers">Elementary Iterative Solvers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#jacobi-method">Jacobi Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#component-form-jacobi-method">Component Form (Jacobi Method)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html">FDM Specialization API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../fvm/index.html">Finite Volume Method (FVM) Specialization</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FleCSI-SP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Finite Difference Method (FDM)</a></li>
+      <li class="breadcrumb-item active">Example Problem</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/fdm/fdm/method.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example-problem">
+<span id="fdm-problem"></span><h1>Example Problem<a class="headerlink" href="#example-problem" title="Permalink to this heading"></a></h1>
+<p>The solvers in this example solve the <em>Poisson</em> problem with <em>Dirichlet</em>
+boundary conditions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+-\mu\Delta u &amp;= f \textrm{ in } \Omega \label{prb}\tag{1}\\
+           u &amp;= g \textrm{ on } \Gamma_\mathcal{D}.
+\end{align}\end{split}\]</div>
+<p>The continuous form is discretized using second-order,
+centered-differences, e.g.</p>
+<div class="math notranslate nohighlight">
+\[\frac{\delta^2 u}{\delta x^2} \approx
+\frac{u_{i+1,j} - 2 u_{i,j} + u_{i-1,j}}{\Delta x^2}.\]</div>
+<p>In 2D with variable spacing across axes, this gives the discrete form</p>
+<div class="math notranslate nohighlight">
+\[-\mu\left(\frac{u_{i+1,j} - 2 u_{i,j} + u_{i-1,j}}{\Delta x^2} +
+\frac{u_{i,j+1} - 2 u_{i,j} + u_{i,j-1}}{\Delta y^2}\right) =
+f_{i,j}.\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The sign of the operator is convenient for defining a
+smoothing update as shown in the next section.</p>
+</div>
+</section>
+<section id="elementary-iterative-solvers">
+<h1>Elementary Iterative Solvers<a class="headerlink" href="#elementary-iterative-solvers" title="Permalink to this heading"></a></h1>
+<p>Notice that (<span class="math notranslate nohighlight">\(\ref{prb}\)</span>) has the form</p>
+<div class="math notranslate nohighlight">
+\[A\mathbf{u}=f.\label{alg}\tag{2}\]</div>
+<p>For the moment, assume that we can write <span class="math notranslate nohighlight">\(A\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[A=N^{-1}\left(I-M\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(N\)</span> is an invertible <span class="math notranslate nohighlight">\(n\times n\)</span> matrix. Substituting this
+form for <span class="math notranslate nohighlight">\(A\)</span> in (<span class="math notranslate nohighlight">\(\ref{alg}\)</span>) we can rewrite
+(<span class="math notranslate nohighlight">\(\ref{prb}\)</span>) as</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{u} = M\mathbf{u} + N\mathbf{f}.\label{mform}\tag{3}\]</div>
+<p>This is relevant because a linear, stationary iterative method can be
+expressed in the discrete form</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{v}^{k+1} = M\mathbf{v}^k + N\mathbf{f}.\label{dmform}\tag{4}\]</div>
+<p>Using recursion, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\mathbf{v}^{k+1} &amp;= M\mathbf{v}^k + N\mathbf{f} \\
+                 &amp;= M\left(M\mathbf{v}^{k-1}+N\mathbf{f}\right) +
+                 N\mathbf{f} \\
+                 \vdots \\
+                 &amp;= M^{k+1}\mathbf{v}^{(0)} + \left(M^k + M^{k-1} + \dots
+                 + I\right)N\mathbf{f}
+\end{align}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{v}^{(0)}\)</span> is the initial guess. Assymptotically, as
+<span class="math notranslate nohighlight">\(k\rightarrow\infty\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\lim_{k\rightarrow\infty} \mathbf{v}^{k+1} =
+\lim_{k\rightarrow\infty} M^{k+1}\mathbf{v}^{(0)} +
+\lim_{k\rightarrow\infty} \left( \sum_{j=0}^{k}M^j\right)N\mathbf{f}.\]</div>
+<p>Consider that <span class="math notranslate nohighlight">\(\rho(M)&lt;1\)</span> implies that</p>
+<div class="math notranslate nohighlight">
+\[\lim_{k\rightarrow\infty}M^{k+1}=0.\]</div>
+<p>Let <span class="math notranslate nohighlight">\(\lambda\in\sigma\left(M\right)\)</span>, then
+<span class="math notranslate nohighlight">\(1-\lambda \in \sigma\left(I-M\right)\)</span>. Since
+<span class="math notranslate nohighlight">\(\lambda\leq\rho(M)&lt;1\)</span>, it must be true that
+<span class="math notranslate nohighlight">\(1-\lambda\ne 0\)</span>, which implies that <span class="math notranslate nohighlight">\(\left(I-M\right)^{-1}\)</span>
+exists.</p>
+<p>Defining <span class="math notranslate nohighlight">\(\mathcal{S}_k=\left(\sum_{j=0}^k M^j\right)\)</span>,
+we see that</p>
+<div class="math notranslate nohighlight">
+\[\left(I-M\right)\mathcal{S}_k = \left(I+M+M^2 + \dots + M^{k+1}\right) -
+\left(M+M^2 + \dots + M^{k+1}\right) = \left(I-M^{k+1}\right),\]</div>
+<p>which implies that</p>
+<div class="math notranslate nohighlight">
+\[\lim_{k\rightarrow\infty}\left(I-M\right)\mathcal{S}_k =
+\lim_{k\rightarrow\infty}\left(I-M^{k+1}\right) = I.\]</div>
+<p>This shows that <span class="math notranslate nohighlight">\(\mathcal{S}_k\)</span> converges to
+<span class="math notranslate nohighlight">\(\left(I-M\right)^{-1}\)</span>. Solving (<span class="math notranslate nohighlight">\(\ref{mform}\)</span>)
+algebraically, we see that</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{u} = \left(I-M\right)^{-1}N\mathbf{f}.\]</div>
+<p>Therefore, we have shown that, asymptotically, the algebraic solution of
+(<span class="math notranslate nohighlight">\(\ref{mform}\)</span>) is recovered by the iteration
+(<span class="math notranslate nohighlight">\(\ref{dmform}\)</span>). It remains to show that we can find suitable
+<span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(N\)</span> matrices.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(N\)</span> are generally
+referred to as the <em>iteration</em> matrix and the <em>approximate inverse</em>,
+respectively.</p>
+</div>
+<section id="jacobi-method">
+<h2>Jacobi Method<a class="headerlink" href="#jacobi-method" title="Permalink to this heading"></a></h2>
+<p>Splitting <span class="math notranslate nohighlight">\(A=D-L-U\)</span> into its <em>diagonal</em>, and <em>lower</em> and <em>upper</em>
+triangular parts, and substituting into (<span class="math notranslate nohighlight">\(\ref{prb}\)</span>), we can write</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{u} = D^{-1}\left(L+U\right)\mathbf{u}+D^{-1}\mathbf{f}.\]</div>
+<p>Defining <span class="math notranslate nohighlight">\(M_J=D^{-1}\left(L+U\right)\)</span> (the <em>iteration</em> matrix)
+and <span class="math notranslate nohighlight">\(N_J=D^{-1}\)</span> (the <em>approximate inverse</em>), we can write
+(<span class="math notranslate nohighlight">\(\ref{dmform}\)</span>) as</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{v}^{k+1} = M_J\mathbf{v}^k + N_J\mathbf{f}.
+\label{jacobi}\tag{5}\]</div>
+<p>This is the matrix form of the <em>Jacobi</em> method. A useful modification to
+(<span class="math notranslate nohighlight">\(\ref{jacobi}\)</span>) is to add a <em>damping</em> factor
+<span class="math notranslate nohighlight">\(\omega\in\left(0,1\right]\)</span> and defining an iteration that is the
+weighted average of the current and previous approximations. If we apply
+the standard Jacobi method</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\hat{v}}^{k+1} = M_J\mathbf{v}^k + N_J\mathbf{f},\]</div>
+<p>then the <span class="math notranslate nohighlight">\(\omega\)</span>-Jacobi method is given by</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{v}^{k+1} = \left(1-\omega\right)\mathbf{v}^k +
+\omega\mathbf{\hat{v}}^{k+1}\label{djacobi}\tag{6},\]</div>
+<p>with iterartion matrix and approximate inverse
+<span class="math notranslate nohighlight">\(M_{J_{\omega}} = \left(1-\omega\right)I + \omega M_J\)</span>
+and <span class="math notranslate nohighlight">\(N_{J_{\omega}}=\omega D^{-1}\)</span>, respectively.
+Again, <span class="math notranslate nohighlight">\(\rho\left(M_{J_{\omega}}\right)&lt;1\)</span> ensures convergence.</p>
+</section>
+<section id="component-form-jacobi-method">
+<h2>Component Form (Jacobi Method)<a class="headerlink" href="#component-form-jacobi-method" title="Permalink to this heading"></a></h2>
+<p>The matrix form of an iterative method is useful for analysis. However,
+when actually implementing the method in a computer code, it is
+prefereable to use the <em>component</em> form. For the Jacobi method, the
+component form is</p>
+<div class="math notranslate nohighlight">
+\[v_i^{k+1} = \frac{1}{a_{i,j}}\left(\sum_{j\ne i}^{n} a_{i,j}v_j^k +
+f_i\right).\]</div>
+<p>Applying the Jacobi method to (<span class="math notranslate nohighlight">\(\ref{prb}\)</span>) with <span class="math notranslate nohighlight">\(\mu=1\)</span> for
+a two-dimensional domain with variable axis spacing, we have the
+component form</p>
+<div class="math notranslate nohighlight">
+\[\hat{v}_{i,j}^{k+1} =
+\frac{1}{2\left(\frac{\Delta x}{\Delta y} +
+  \frac{\Delta y}{\Delta x}\right)}
+\left[
+\Delta x \Delta y f_{i,j} +
+\frac{\Delta y}{\Delta x}
+  \left(v_{i+1,j}^k + v_{i-1,j}^k\right) +
+\frac{\Delta x}{\Delta y}
+  \left(v_{i,j+1}^k + v_{i,j-1}^k\right) +
+\right].\]</div>
+<p>The damped version follows (<span class="math notranslate nohighlight">\(\ref{djacobi}\)</span>). This is one of the
+methods used in the code for this specialization example.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Finite Difference Method (FDM)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="FDM Specialization API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright (C) 2023, Triad National Security, LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+  <style>
+    /* Contents caption */
+    .wy-menu-vertical>p.caption {
+      color: #ffffff;
+    }
+
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #e3e2db;
+    }
+    .wy-side-nav-search>div.version, .wy-nav-top>div.version {
+      color: #5f5d5f;
+    }
+
+    /* Sidebar */
+    .wy-nav-side {
+      background: #216897;
+      color: #ffffff;
+    }
+  </style>
+
+
+</body>
+</html>

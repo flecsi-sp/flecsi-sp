@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FDM Specialization API Reference &mdash; FleCSI-SP  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="canonical" href="http://www.flecsi.org/fdm/fdm/api.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Finite Volume Method (FVM) Specialization" href="../../fvm/index.html" />
+    <link rel="prev" title="Example Problem" href="method.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/flecsi-sp.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                Version: 
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Finite Difference Method (FDM)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="method.html">Example Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="method.html#elementary-iterative-solvers">Elementary Iterative Solvers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FDM Specialization API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../fvm/index.html">Finite Volume Method (FVM) Specialization</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FleCSI-SP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Finite Difference Method (FDM)</a></li>
+      <li class="breadcrumb-item active">FDM Specialization API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/fdm/fdm/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fdm-specialization-api-reference">
+<span id="fdm-api"></span><h1>FDM Specialization API Reference<a class="headerlink" href="#fdm-specialization-api-reference" title="Permalink to this heading"></a></h1>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4meshE">
+<span id="_CPPv3N3fdm4meshE"></span><span id="_CPPv2N3fdm4meshE"></span><span id="fdm::mesh"></span><span class="target" id="structfdm_1_1mesh"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mesh</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">flecsi</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">topo</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">specialization</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">flecsi</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">topo</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">narray</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N3fdm4meshE" title="fdm::mesh"><span class="n"><span class="pre">mesh</span></span></a><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N3fdm4meshE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A node-centered (vertices) Cartesian mesh specialization. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh4axisE">
+<span id="_CPPv3N3fdm4mesh4axisE"></span><span id="_CPPv2N3fdm4mesh4axisE"></span><span class="target" id="structfdm_1_1mesh_1accc088009d44c521706aa98d6387ee21"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">axis</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh4axisE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Mesh axes. </p>
+<p>The axis identifies a Cartesian coordinate axis on the mesh. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh4axis6x_axisE">
+<span id="_CPPv3N3fdm4mesh4axis6x_axisE"></span><span id="_CPPv2N3fdm4mesh4axis6x_axisE"></span><span class="target" id="structfdm_1_1mesh_1accc088009d44c521706aa98d6387ee21a3f97a1f29dfcdbdf3f8c8f5bd0fada35"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">x_axis</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh4axis6x_axisE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>X-coordinate axis. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh4axis6y_axisE">
+<span id="_CPPv3N3fdm4mesh4axis6y_axisE"></span><span id="_CPPv2N3fdm4mesh4axis6y_axisE"></span><span class="target" id="structfdm_1_1mesh_1accc088009d44c521706aa98d6387ee21aa26dce6a05fe7197b8a3bf10245f77ef"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">y_axis</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh4axis6y_axisE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Y-coordinate axis. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh8boundaryE">
+<span id="_CPPv3N3fdm4mesh8boundaryE"></span><span id="_CPPv2N3fdm4mesh8boundaryE"></span><span class="target" id="structfdm_1_1mesh_1a23d35531b04e26bcae25360217ac8229"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">boundary</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh8boundaryE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Boundary. </p>
+<p>Identifies the low or high boundary along a particular axis. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh8boundary3lowE">
+<span id="_CPPv3N3fdm4mesh8boundary3lowE"></span><span id="_CPPv2N3fdm4mesh8boundary3lowE"></span><span class="target" id="structfdm_1_1mesh_1a23d35531b04e26bcae25360217ac8229a255eedc46d9e0ae208805501fe0b0ea3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">low</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh8boundary3lowE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Low axis boundary. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh8boundary4highE">
+<span id="_CPPv3N3fdm4mesh8boundary4highE"></span><span id="_CPPv2N3fdm4mesh8boundary4highE"></span><span class="target" id="structfdm_1_1mesh_1a23d35531b04e26bcae25360217ac8229a4a730add1be3f261a335b140fa220c76"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">high</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh8boundary4highE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>High axis boundary. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh6domainE">
+<span id="_CPPv3N3fdm4mesh6domainE"></span><span id="_CPPv2N3fdm4mesh6domainE"></span><span class="target" id="structfdm_1_1mesh_1a8a6287602630db6aeffcb6cf5787a216"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">domain</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh6domainE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Mesh domains. </p>
+<p>The domain identifies the supported iteration spaces on the mesh. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh6domain8interiorE">
+<span id="_CPPv3N3fdm4mesh6domain8interiorE"></span><span id="_CPPv2N3fdm4mesh6domain8interiorE"></span><span class="target" id="structfdm_1_1mesh_1a8a6287602630db6aeffcb6cf5787a216a0f9edb00af068858e20196d2ffec7e77"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">interior</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh6domain8interiorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>This domain includes the DOFs of the problem. </p>
+<p>It does not include the dirichlet boundary vertices. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh6domain7logicalE">
+<span id="_CPPv3N3fdm4mesh6domain7logicalE"></span><span id="_CPPv2N3fdm4mesh6domain7logicalE"></span><span class="target" id="structfdm_1_1mesh_1a8a6287602630db6aeffcb6cf5787a216a4c336eac01d47f74becbaad75c810757"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">logical</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh6domain7logicalE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>This domain includes the “logical” vertices, i.e., those that exist in a raw partitioning of the domain into non-intersecting sets of vertices. </p>
+<p>It does not include ghost vertices. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh6domain3allE">
+<span id="_CPPv3N3fdm4mesh6domain3allE"></span><span id="_CPPv2N3fdm4mesh6domain3allE"></span><span class="target" id="structfdm_1_1mesh_1a8a6287602630db6aeffcb6cf5787a216a8701c301e7c87ec4d4f3aee33c6128d7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">all</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh6domain3allE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>This domain includes all local vertices, including ghost cells. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh6domain6globalE">
+<span id="_CPPv3N3fdm4mesh6domain6globalE"></span><span id="_CPPv2N3fdm4mesh6domain6globalE"></span><span class="target" id="structfdm_1_1mesh_1a8a6287602630db6aeffcb6cf5787a216ac0848296a9510c4fc803b4553e6f75f9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">global</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh6domain6globalE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>This domain includes all global cells. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4I0EN3fdm4mesh9interfaceE">
+<span id="_CPPv3I0EN3fdm4mesh9interfaceE"></span><span id="_CPPv2I0EN3fdm4mesh9interfaceE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">B</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structfdm_1_1mesh_1_1interface"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">interface</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0EN3fdm4mesh9interfaceE" title="fdm::mesh::interface::B"><span class="n"><span class="pre">B</span></span></a><a class="headerlink" href="#_CPPv4I0EN3fdm4mesh9interfaceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Mesh Interface. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_4axis_6domainEN3fdm4mesh9interface4sizeENSt6size_tEv">
+<span id="_CPPv3I_4axis_6domainEN3fdm4mesh9interface4sizeEv"></span><span id="_CPPv2I_4axis_6domainEN3fdm4mesh9interface4sizeEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N3fdm4mesh4axisE" title="fdm::mesh::axis"><span class="n"><span class="pre">axis</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">A</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N3fdm4mesh6domainE" title="fdm::mesh::domain"><span class="n"><span class="pre">domain</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">interior</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structfdm_1_1mesh_1_1interface_1a14aa9082a361991ccf872c66524a81c0"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I_4axis_6domainEN3fdm4mesh9interface4sizeENSt6size_tEv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Return the size for the given axis and domain. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – The mesh axis. </p></li>
+<li><p><strong>DM</strong> – The mesh domain. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4I_4axis_6domain_bENK3fdm4mesh9interface8verticesEDav">
+<span id="_CPPv3I_4axis_6domain_bENK3fdm4mesh9interface8verticesEv"></span><span id="_CPPv2I_4axis_6domain_bENK3fdm4mesh9interface8verticesEv"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N3fdm4mesh4axisE" title="fdm::mesh::axis"><span class="n"><span class="pre">axis</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">A</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N3fdm4mesh6domainE" title="fdm::mesh::domain"><span class="n"><span class="pre">domain</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">DM</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">interior</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">R</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structfdm_1_1mesh_1_1interface_1a80948d3084a08ec6a93552cff050682a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">auto</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vertices</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4I_4axis_6domain_bENK3fdm4mesh9interface8verticesEDav" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Return a range over the given axis and domain. </p>
+<p>
+The range can be used to iterate over the cells in the given domain, e.g.: <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="n">auto</span> <span class="n">j</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">vertices</span><span class="o">&lt;</span><span class="n">mesh</span><span class="p">::</span><span class="n">y_axis</span><span class="p">,</span> <span class="n">mesh</span><span class="p">::</span><span class="n">interior</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span>
+  <span class="k">for</span><span class="p">(</span><span class="n">auto</span> <span class="n">i</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">vertices</span><span class="o">&lt;</span><span class="n">mesh</span><span class="p">::</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">mesh</span><span class="p">::</span><span class="n">interior</span><span class="o">&gt;</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+  <span class="p">}</span> <span class="o">//</span> <span class="k">for</span>
+<span class="p">}</span> <span class="o">//</span> <span class="k">for</span>
+</pre></div>
+</div>
+ </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – The mesh axis. </p></li>
+<li><p><strong>DM</strong> – The mesh domain (excluding <em>global</em>).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4I00EN3fdm4mesh9interface16stencil_operatorE">
+<span id="_CPPv3I00EN3fdm4mesh9interface16stencil_operatorE"></span><span id="_CPPv2I00EN3fdm4mesh9interface16stencil_operatorE"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Sten</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MDColex</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structfdm_1_1mesh_1_1interface_1_1stencil__operator"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">stencil_operator</span></span></span><a class="headerlink" href="#_CPPv4I00EN3fdm4mesh9interface16stencil_operatorE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N3fdm4mesh9meta_dataE">
+<span id="_CPPv3N3fdm4mesh9meta_dataE"></span><span id="_CPPv2N3fdm4mesh9meta_dataE"></span><span id="fdm::mesh::meta_data"></span><span class="target" id="structfdm_1_1mesh_1_1meta__data"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">meta_data</span></span></span><a class="headerlink" href="#_CPPv4N3fdm4mesh9meta_dataE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="method.html" class="btn btn-neutral float-left" title="Example Problem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../fvm/index.html" class="btn btn-neutral float-right" title="Finite Volume Method (FVM) Specialization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright (C) 2023, Triad National Security, LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>  
+
+  <style>
+    /* Contents caption */
+    .wy-menu-vertical>p.caption {
+      color: #ffffff;
+    }
+
+    /* Sidebar header (and topbar for mobile) */
+    .wy-side-nav-search, .wy-nav-top {
+      background: #e3e2db;
+    }
+    .wy-side-nav-search>div.version, .wy-nav-top>div.version {
+      color: #5f5d5f;
+    }
+
+    /* Sidebar */
+    .wy-nav-side {
+      background: #216897;
+      color: #ffffff;
+    }
+  </style>
+
+
+</body>
+</html>
