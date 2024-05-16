@@ -6,6 +6,12 @@
 cmake_minimum_required(VERSION 3.19)
 
 #------------------------------------------------------------------------------#
+# CMake policies.
+#------------------------------------------------------------------------------#
+
+cmake_policy(SET CMP0144 NEW) # ``PACKAGE_NAME''_ROOT
+
+#------------------------------------------------------------------------------#
 # Add local module path.
 #------------------------------------------------------------------------------#
 
@@ -74,8 +80,8 @@ if(ENABLE_DOCUMENTATION)
     file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/.sphinx/${_SUBDIR}/${_SUBDIR}/src)
     execute_process(COMMAND
       ${CMAKE_COMMAND} -E create_symlink
-        ${CMAKE_SOURCE_DIR}/sp/${_SUBDIR}/${_SUBDIR}
-        ${CMAKE_BINARY_DIR}/.sphinx/${_SUBDIR}/${_SUBDIR}/src/${_SUBDIR}
+        ${CMAKE_SOURCE_DIR}/sp/${_SUBDIR}/spec
+        ${CMAKE_BINARY_DIR}/.sphinx/${_SUBDIR}/${_SUBDIR}/src/spec
     )
     execute_process(COMMAND
       ${CMAKE_COMMAND} -E create_symlink
