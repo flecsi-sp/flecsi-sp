@@ -1,8 +1,8 @@
 [submodule "sp/fdm"]
 	path = sp/fdm
-	url = ssh://git@re-git.lanl.gov:10022/flecsi-sp/fdm.git
+	url = ../fdm.git
   branch = develop
 [submodule "sp/fvm"]
 	path = sp/fvm
-	url = ssh://git@re-git.lanl.gov:10022/flecsi-sp/fvm.git
+	url = ../fvm.git
   branch = develop
