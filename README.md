@@ -1,4 +1,4 @@
-![logo](doc/sphinx/_static/flecsi-sp.png)
+![logo](doc/sphinx/_static/flecsi-sp-white.png)
 
 # Introduction
 
