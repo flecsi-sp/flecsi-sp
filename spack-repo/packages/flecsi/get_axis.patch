@@ -1,0 +1,12 @@
+diff --git a/flecsi/topo/narray/interface.hh b/flecsi/topo/narray/interface.hh
+index 62c388aa4..cffc1d9ef 100644
+--- a/flecsi/topo/narray/interface.hh
++++ b/flecsi/topo/narray/interface.hh
+@@ -805,7 +805,6 @@ protected:
+     }
+   }
+ 
+-private:
+   template<index_space S, axis A>
+   FLECSI_INLINE_TARGET const axis_color & get_axis() const {
+     return meta_->template get<S>().axcol.template get<A>();
