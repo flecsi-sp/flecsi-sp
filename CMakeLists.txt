@@ -49,7 +49,7 @@ if(ENABLE_DOCUMENTATION)
   include(FleCSI/documentation)
   include(FleCSI/doxygen)
   include(FleCSI/sphinx)
-  include(FleCSI/subdirlist)
+  include(subdirlist)
 
   # Avoid race condition by proactively creating output directory
   file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/.doxygen/xml)
